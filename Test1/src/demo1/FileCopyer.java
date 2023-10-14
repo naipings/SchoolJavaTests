@@ -51,6 +51,36 @@ public class FileCopyer {
         }
     }
 
+    //读取文件指定内容
+    public String testReadFileOrder(String sourcePath, Integer line) throws IOException {
+        if ( arrayList.size() == 0 ) {
+            testReadFile(sourcePath);
+        }
+
+        String rs = "666";
+        System.out.println("rs="+rs);
+
+        //判断str中是否有xywh/子串，为true则说明有。进去if语句
+        if ( arrayList.get(line).contains("xywh/") ) {
+            System.out.println("yes!");
+            //取得子串的初始位置
+            int i = arrayList.get(line).indexOf("xywh/");
+            //System.out.println("i="+i);
+            i = i + 4;
+            //根据的要取的内容后多少字符+多少个
+            int count = 1;
+            String sc = arrayList.get(line).substring(i+count,i+count+1);
+            System.out.println("sc="+sc);
+            while ( !sc.equals("/") && i+count < arrayList.get(line).length() ) {
+                sc = arrayList.get(line).substring(i+count,i+count+1);
+                count++;
+            }
+            rs = arrayList.get(line).substring(i+1,i+count-1);
+            //System.out.println("rs="+rs);
+        }
+        return rs;
+    }
+
     //文件写入
     public void testWriteFile(String[] source, String targetPath) throws IOException {
         FileWriter fileWriter = new FileWriter(targetPath);
@@ -63,6 +93,12 @@ public class FileCopyer {
         }
         fileWriter.close();
     }
+
+
+
+
+
+
 
 
 }

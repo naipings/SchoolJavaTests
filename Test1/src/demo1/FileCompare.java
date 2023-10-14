@@ -6,11 +6,14 @@ import java.util.*;
 public class FileCompare {
 
     protected static ArrayList<String> arrayList1 = new ArrayList<String>();
+    protected static ArrayList<File> files = new ArrayList<File>();
 
     //按照文件大小降序排序
-    public static void orderByLength(String filePath) {
-        List<File> files = Arrays.asList(new File(filePath).listFiles());
-        Collections.sort(files, new Comparator< File>() {
+    public static void orderByLength2(String[] filePath) {
+        for ( int i=0; i<filePath.length; i++ ) {
+            files.add(new File(filePath[i]));
+        }
+        Collections.sort(files, new Comparator<File>() {
             public int compare(File f1, File f2) {
                 long diff = f1.length() - f2.length();
                 if (diff < 0) //如果想要升序，就把<改成>
@@ -24,12 +27,13 @@ public class FileCompare {
                 return true;
             }
         });
+
         for (File f : files) {
             if(f.isDirectory()) continue;
-            arrayList1.add(f.getName());
-            //System.out.println(arrayList1.get(0));
+            arrayList1.add(f.getAbsolutePath());
             System.out.println(f.getName()+": "+f.length()+" type");
         }
+
     }
 
 }
