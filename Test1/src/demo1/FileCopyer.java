@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import static src.demo1.FileCompare.arrayList1;
+import static src.demo1.FileCompare.*;
 
 public class FileCopyer {
 
@@ -26,7 +26,6 @@ public class FileCopyer {
         System.out.println("Time Usage : " + (end-start));
     }
 
-
     //从网站读取文件
     public void copyFromWeb(String sourcePath, String targetPath) throws IOException {
         URL url = new URL(sourcePath);
@@ -43,7 +42,7 @@ public class FileCopyer {
     //读取文件内容
     public void testReadFile(String sourcePath) throws IOException {
         try (Scanner sc = new Scanner(new FileReader(sourcePath))) {
-            while (sc.hasNextLine()) {  //按行读取字符串
+            while ( sc.hasNextLine() ) {  //按行读取字符串
                 String line = sc.nextLine();
                 arrayList.add(line);
                 System.out.println(line);
@@ -58,7 +57,7 @@ public class FileCopyer {
         }
 
         String rs = "666";
-        System.out.println("rs="+rs);
+        //System.out.println("rs="+rs);
 
         //判断str中是否有xywh/子串，为true则说明有。进去if语句
         if ( arrayList.get(line).contains("xywh/") ) {
@@ -70,7 +69,7 @@ public class FileCopyer {
             //根据的要取的内容后多少字符+多少个
             int count = 1;
             String sc = arrayList.get(line).substring(i+count,i+count+1);
-            System.out.println("sc="+sc);
+            //System.out.println("sc="+sc);
             while ( !sc.equals("/") && i+count < arrayList.get(line).length() ) {
                 sc = arrayList.get(line).substring(i+count,i+count+1);
                 count++;
@@ -85,11 +84,10 @@ public class FileCopyer {
     public void testWriteFile(String[] source, String targetPath) throws IOException {
         FileWriter fileWriter = new FileWriter(targetPath);
 
-        int count = 1;
         for ( int i=0; i<arrayList1.size(); i++ ) {
-            fileWriter.write(count+" "+source[i]+'\n');
+            fileWriter.write(lengthFile.get(i)+" "+source[i]+'\n');
             fileWriter.flush();
-            count++;
+
         }
         fileWriter.close();
     }

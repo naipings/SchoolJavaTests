@@ -1,6 +1,7 @@
 package src.demo1;
 
 import java.io.*;
+import java.util.List;
 
 import static src.demo1.FileCompare.arrayList1;
 import static src.demo1.FileCopyer.arrayList;
@@ -22,12 +23,11 @@ public class ImgTextCopy {
 			throw new RuntimeException(e);
 		}
 
-
 		try {
 			copyer.testReadFile(targetPath);
 			for ( int i=0; i< arrayList.size(); i++ ) {
 				String rs = copyer.testReadFileOrder(targetPath, i);
-				System.out.println("rs="+rs);
+				//System.out.println("rs="+rs);
 				String targetPath0 = String.format("C:\\images\\www.swu.edu.cn\\xywh\\%s\\01.jpg", rs);
 				lineStrings[i] = targetPath0;
 				copyer.copyFromWeb(arrayList.get(i), targetPath0);
@@ -36,10 +36,8 @@ public class ImgTextCopy {
 			throw new RuntimeException(e);
 		}
 
-
-
 		FileCompare fileCompare = new FileCompare();
-		fileCompare.orderByLength2(lineStrings);
+		fileCompare.orderByLength(lineStrings);
 		String[] strings = new String[arrayList1.size()];
 		try {
 			String targetPath1 = "C:\\images\\images-sorted.txt";
